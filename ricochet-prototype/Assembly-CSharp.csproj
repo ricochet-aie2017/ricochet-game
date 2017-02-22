@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\CameraActor.cs" />
      <Compile Include="Assets\ClickToMove.cs" />
+     <Compile Include="Assets\LookAtMouse.cs" />
      <Compile Include="Assets\PlayerActor.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

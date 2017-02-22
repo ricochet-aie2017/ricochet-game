@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ClickToMove : MonoBehaviour
 {
-    public float recoilFactor = 10.0f;
+    public float recoilFactor = 1.0f;
 
     private NavMeshAgent agent;
 
@@ -28,7 +28,7 @@ public class ClickToMove : MonoBehaviour
                 Vector3 destination = this.transform.position + ((-unit) * recoilFactor);
                 // hit.point: +ve = move towards, -ve = move away
                 agent.destination = destination;
-                print(agent.destination);
+                //print(agent.destination);
             }
         }
     }
