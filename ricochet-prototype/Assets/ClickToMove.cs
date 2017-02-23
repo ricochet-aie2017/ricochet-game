@@ -24,6 +24,7 @@ public class ClickToMove : MonoBehaviour
 
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
             {
+                Debug.DrawLine(transform.position, hit.point, Color.cyan);
                 Vector3 unit = (hit.point - this.transform.position).normalized;
                 Vector3 destination = this.transform.position + ((-unit) * recoilFactor);
                 // hit.point: +ve = move towards, -ve = move away
