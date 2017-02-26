@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\CameraActor.cs" />
      <Compile Include="Assets\ClickToMove.cs" />
+     <Compile Include="Assets\EnemyActor.cs" />
+     <Compile Include="Assets\EnemySpawnActor.cs" />
      <Compile Include="Assets\LookAtMouse.cs" />
      <Compile Include="Assets\PlayerActor.cs" />
  <Reference Include="UnityEngine.UI">
