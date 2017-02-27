@@ -4,39 +4,41 @@ using UnityEngine;
 
 public class PlayerActor : MonoBehaviour {
 
-    public float speed = 10.0f;
+    //public float speed = 10.0f;
 
-    private CharacterController controller;
-    private Vector3 mpos;
-    private Vector3 moveDirection;
-    private Vector3 start;
-    private Vector3 end;
+    //private CharacterController controller;
+    //private Vector3 mpos;
+    //private Vector3 moveDirection;
+    //private Vector3 start;
+    //private Vector3 end;
 
 	// Use this for initialization
 	void Start () {
-        controller = gameObject.GetComponent<CharacterController>();
-        mpos = new Vector3(0, 0, 0);
-        moveDirection = new Vector3(0, 0, 0);
-        start = this.transform.position;
-        end = this.transform.position;
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-        start = this.transform.position;
+        Vector3 mouse_pos = Input.mousePosition;
+        Ray mouse_ray = Camera.main.ScreenPointToRay(mouse_pos);
+        Plane player_plane = new Plane(Vector3.up, transform.position);
 
-        moveDirection = end - start;
-        moveDirection.Normalize();
+        float ray_distance = 0;
+        player_plane.Raycast(mouse_ray, out ray_distance);
 
-        if (Vector3.Distance(start, end) > 10)
+        Vector3 cast_point = mouse_ray.GetPoint(ray_distance);
+
+        Vector3 to_cast_point = cast_point - transform.position;
+        to_cast_point.Normalize();
+        Ray fire_ray = new Ray(transform.position, to_cast_point);
+
+        RaycastHit info;
+        if (Input.GetMouseButton(0) && Physics.Raycast(fire_ray, out info))
         {
-            controller.Move(((moveDirection) * speed) * Time.deltaTime);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            end = Input.mousePosition;
-            print(end);
+            if(info.collider.tag == "Enemy")
+            {
+                Destroy(info.collider.gameObject);
+            }
         }
     }
 }
