@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerActor : MonoBehaviour {
+	public GameObject Projectile = null;
 
     //public float speed = 10.0f;
 
@@ -41,4 +42,20 @@ public class PlayerActor : MonoBehaviour {
             }
         }
     }
+
+	// Spawns and shoots a new bullet projectile
+	public void Shoot(Vector3 dir)
+	{
+		if (Projectile == null)
+		{
+			Debug.LogWarning("Player attempting to shoot projectile, by projectile not set");
+			return;
+		}
+
+
+		var proj = GameObject.Instantiate<GameObject>(Projectile);
+		proj.transform.position = this.transform.position + new Vector3(0, 1, 0);
+		proj.transform.forward = dir;
+		
+	}
 }
