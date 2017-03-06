@@ -20,6 +20,9 @@ public class ClickToMove : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
+			// Tell player to shoot
+			this.GetComponent<PlayerActor>().Shoot();
+
             RaycastHit hit;
 
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))

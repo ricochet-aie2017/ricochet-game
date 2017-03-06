@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerActor : MonoBehaviour {
-	public GameObject Projectile = null;
+	public GameObject Projectile = null; // The projectile to spawn
+	public GameObject Barrel = null; // The spot to spawn projectiles from
+	public float TimeBetweenShots = 0.5f; // Actual time between shooting
+	private float shootTimer = 0.0f; // Countdown timer until the next shot can be fired
 
     //public float speed = 10.0f;
 
@@ -44,18 +47,26 @@ public class PlayerActor : MonoBehaviour {
     }
 
 	// Spawns and shoots a new bullet projectile
-	public void Shoot(Vector3 dir)
+	public void Shoot()
 	{
-		if (Projectile == null)
+		if (Projectile == null || Barrel == null)
 		{
-			Debug.LogWarning("Player attempting to shoot projectile, by projectile not set");
+			Debug.LogWarning("Player attempting to shoot projectile, but projectile or barrel not set");
+			return;
+		}
+
+		// Prevent shooting before time
+		if (shootTimer > 0)
+		{
+			shootTimer -= Time.deltaTime;
 			return;
 		}
 
 
 		var proj = GameObject.Instantiate<GameObject>(Projectile);
-		proj.transform.position = this.transform.position + new Vector3(0, 1, 0);
-		proj.transform.forward = dir;
-		
+		proj.transform.position = Barrel.transform.position;
+		proj.transform.rotation = Barrel.transform.rotation;
+		proj.GetComponent<Rigidbody>().AddForce(Barrel.transform.forward * 1000);
+		shootTimer += TimeBetweenShots;
 	}
 }
