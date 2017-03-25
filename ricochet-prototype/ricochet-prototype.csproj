@@ -75,13 +75,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Bullet.cs" />
-    <Compile Include="Assets\CameraActor.cs" />
-    <Compile Include="Assets\ClickToMove.cs" />
-    <Compile Include="Assets\EnemyActor.cs" />
-    <Compile Include="Assets\EnemySpawnActor.cs" />
-    <Compile Include="Assets\LookAtMouse.cs" />
-    <Compile Include="Assets\PlayerActor.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\CameraActor.cs" />
+    <Compile Include="Assets\Scripts\ClickToMove.cs" />
+    <Compile Include="Assets\Scripts\EnemyActor.cs" />
+    <Compile Include="Assets\Scripts\EnemySpawnActor.cs" />
+    <Compile Include="Assets\Scripts\LookAtMouse.cs" />
+    <Compile Include="Assets\Scripts\PlayerActor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
