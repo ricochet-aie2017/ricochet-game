@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ricochet-prototype", "ricochet-prototype.csproj", "{7EDD3BF5-1F82-42A8-FEEF-21DAD597E91D}"
 EndProject
 Global
