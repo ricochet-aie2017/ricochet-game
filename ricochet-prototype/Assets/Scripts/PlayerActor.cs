@@ -9,6 +9,7 @@ public class PlayerActor : MonoBehaviour {
 	public GameObject Barrel = null; // The spot to spawn projectiles from
     public float recoilFactor = 1.0f; // Amount of recoil, TODO: Maybe make a weapon class to put this code in instead?
     public float TimeBetweenShots = 0.5f; // Actual time between shooting
+    public float SpeedFalloff = 0.99f; // How quickly the movement speed from shooting falls off(closer to 1.0 means less friction)
 	private float shootTimer = 0.0f; // Countdown timer until the next shot can be fired
 
     //public float speed = 10.0f;
@@ -51,7 +52,7 @@ public class PlayerActor : MonoBehaviour {
         
         // Movement
         GetComponent<CharacterController>().Move((moveDirection * recoilFactor) * Time.deltaTime);
-        moveDirection *= 0.9f; // Falloff
+        moveDirection *= SpeedFalloff;
 
         // Update timer
         if (shootTimer > 0)
