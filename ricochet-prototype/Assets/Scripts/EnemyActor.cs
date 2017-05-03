@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyActor : MonoBehaviour {
 
     public float speed;
     public int health;
+    public int damage;
+    public int points;
     private PlayerActor player;
     //private CharacterController controller;
 
     private UnityEngine.AI.NavMeshAgent agent;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         player = GameObject.FindObjectOfType<PlayerActor>();
         //controller = gameObject.GetComponent<CharacterController>();
 
@@ -58,6 +61,8 @@ public class EnemyActor : MonoBehaviour {
         OnKilled(killer);
 
         Destroy(this.gameObject);
+        player.kills++;
+        player.killPoints += points;
     }
 
     protected virtual void OnKilled(GameObject killer)
