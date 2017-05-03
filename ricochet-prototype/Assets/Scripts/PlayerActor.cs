@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActor : MonoBehaviour {
+    // UI Elements
+    public Text maxAmmo;
+    public Text curAmmo;
+    
     // TODO: Create a weapon system
     //public AudioClip ShootSound = null; // Sound to play when shooting
 	public GameObject Projectile = null; // The projectile to spawn
@@ -12,11 +17,9 @@ public class PlayerActor : MonoBehaviour {
     //public float TimeBetweenShots = 0.5f; // Actual time between shooting
     public float SpeedFalloff = 0.99f; // How quickly the movement speed from shooting falls off(closer to 1.0 means less friction)
 
-	//private float shootTimer = 0.0f; // Countdown timer until the next shot can be fired
-    public float health = 100.0f;
+    // Points System
     public int kills = 0;
     public int killPoints = 0;
-
 
     // Weapon System
     private WeaponDatabase weaponDB;
@@ -154,6 +157,9 @@ public class PlayerActor : MonoBehaviour {
         }
         if (swapToTimer > 0)
             swapToTimer -= Time.deltaTime;
+
+        curAmmo.text = (currentWeapon.Ammo).ToString();
+        maxAmmo.text = (currentWeapon.ClipSize).ToString();
     }
 
     // I thought about making an input class to handle all inputs, that still

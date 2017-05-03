@@ -54,7 +54,9 @@
      <Compile Include="Assets\Scripts\EnemyActor.cs" />
      <Compile Include="Assets\Scripts\EnemyAttack.cs" />
      <Compile Include="Assets\Scripts\EnemySpawnActor.cs" />
+     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
      <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
+     <Compile Include="Assets\Scripts\LoadScore.cs" />
      <Compile Include="Assets\Scripts\LookAtMouse.cs" />
      <Compile Include="Assets\Scripts\PlayerActor.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />

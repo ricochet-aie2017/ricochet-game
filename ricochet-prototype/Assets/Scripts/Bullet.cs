@@ -12,12 +12,17 @@ public class Bullet : MonoBehaviour
     public int Damage = 5;
     public int Speed = 500;
     public int SpeedPerBounce = 500;
+
+    GameObject player;
+    PlayerHealth playerHealth;
     
 
 	// Use this for initialization
 	void Start ()
 	{
         GetComponent<Rigidbody>().AddForce(this.transform.forward * Speed);
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 	
 	// Update is called once per frame
@@ -40,6 +45,7 @@ public class Bullet : MonoBehaviour
         // Check for player collision
         if (collision.gameObject.name == "Player") // Hit the player
         {
+            playerHealth.TakeDamage(Damage);
             Kill();
             return;
         }
@@ -51,7 +57,8 @@ public class Bullet : MonoBehaviour
 
             if (enemyScript != null)
             {
-                enemyScript.TakeDamage(gameObject, Damage + (BounceCount * DamagePerBounce));
+                //enemyScript.TakeDamage(gameObject, Damage + (BounceCount * DamagePerBounce));
+                enemyScript.TakeDamage(gameObject, Damage + (BounceCount * DamagePerBounce), BounceCount);
 
                 // Destroy the projectile on enemy hit
                 Kill();
