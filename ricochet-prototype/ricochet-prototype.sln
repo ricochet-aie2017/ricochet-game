@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ricochet-prototype", "ricochet-prototype.csproj", "{7EDD3BF5-1F82-42A8-FEEF-21DAD597E91D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ricochet-prototype.Editor", "ricochet-prototype.Editor.csproj", "{F3688079-46ED-6A18-CADA-7AD6E07C747D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{7EDD3BF5-1F82-42A8-FEEF-21DAD597E91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EDD3BF5-1F82-42A8-FEEF-21DAD597E91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EDD3BF5-1F82-42A8-FEEF-21DAD597E91D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3688079-46ED-6A18-CADA-7AD6E07C747D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3688079-46ED-6A18-CADA-7AD6E07C747D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3688079-46ED-6A18-CADA-7AD6E07C747D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3688079-46ED-6A18-CADA-7AD6E07C747D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
