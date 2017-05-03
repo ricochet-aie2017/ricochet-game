@@ -48,7 +48,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter (Collision col)
+    /*void OnCollisionEnter (Collision col)
     {
         // If the entering collider is the player...
         if (col.gameObject == player)
@@ -66,7 +66,7 @@ public class EnemyAttack : MonoBehaviour
             // ... the player is no longer in range.
             playerInRange = false;
         }
-    }
+    }*/
 
     void Update ()
     {

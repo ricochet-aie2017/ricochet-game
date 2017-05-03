@@ -11,12 +11,12 @@ public class PlayerActor : MonoBehaviour {
     //public float recoilFactor = 1.0f; // Amount of recoil, TODO: Maybe make a weapon class to put this code in instead?
     //public float TimeBetweenShots = 0.5f; // Actual time between shooting
     public float SpeedFalloff = 0.99f; // How quickly the movement speed from shooting falls off(closer to 1.0 means less friction)
-<<<<<<< HEAD
-	private float shootTimer = 0.0f; // Countdown timer until the next shot can be fired
+
+	//private float shootTimer = 0.0f; // Countdown timer until the next shot can be fired
     public float health = 100.0f;
     public int kills = 0;
     public int killPoints = 0;
-=======
+
 
     // Weapon System
     private WeaponDatabase weaponDB;
@@ -33,7 +33,6 @@ public class PlayerActor : MonoBehaviour {
 
 
     private AudioSource audioSource = null;
->>>>>>> refs/remotes/origin/master
 
     //public float speed = 10.0f;
 
