@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// TODO: This script is obsolete I believe, during cleanup this should be removed
+// along with the navmeshagent component
 public class ClickToMove : MonoBehaviour
 {
     public float recoilFactor = 1.0f;
@@ -21,7 +23,7 @@ public class ClickToMove : MonoBehaviour
         if(Input.GetMouseButton(0))
         {
 			// Tell player to shoot
-			this.GetComponent<PlayerActor>().Shoot();
+			//this.GetComponent<PlayerActor>().Shoot(); // Moved this to PlayerActor for now
 
             /* Should no longer need this
             RaycastHit hit;
