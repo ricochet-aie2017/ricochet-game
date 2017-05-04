@@ -6,6 +6,7 @@ public class BounceDisplay : MonoBehaviour
 {
     LineRenderer lineRenderer;
     public float MaximumDistance = 100;
+    public int MaximumBounces = 2;
     
 
 	// Use this for initialization
@@ -21,13 +22,14 @@ public class BounceDisplay : MonoBehaviour
         positions.Add(transform.position);
 
         float totalDistance = 0;
+        int bounceCount = 0;
         Vector3 direction = transform.forward;
         Vector3 pos = transform.position;
         // Layer mask, to check against all colliders except those in the bullet layer
         var layerMask = 1 << 8; // BulletLayer is the 8th layer
         layerMask = ~layerMask;
 
-        while (totalDistance < MaximumDistance)
+        while (totalDistance < MaximumDistance && bounceCount < MaximumBounces)
         {
             // Perform the cast
             RaycastHit hit;
@@ -42,6 +44,7 @@ public class BounceDisplay : MonoBehaviour
                     break;
                 
                 totalDistance += hit.distance;
+                bounceCount++;
                 pos = hit.point;
                 // Get the reflection vector against whatever was hit
                 direction = Vector3.Reflect(direction, hit.normal);
