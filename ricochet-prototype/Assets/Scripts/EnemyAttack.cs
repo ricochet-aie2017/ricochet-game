@@ -17,6 +17,7 @@ public class EnemyAttack : MonoBehaviour
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
     float timer;                                // Timer for counting up to the next attack.
 
+    CombatMusicControl musicControl;
 
     void Awake ()
     {
@@ -28,6 +29,7 @@ public class EnemyAttack : MonoBehaviour
         enemyActor = enemy.GetComponent<EnemyActor>();
         //enemyHealth = GetComponent<EnemyHealth>();
         //anim = GetComponent <Animator> ();
+        musicControl = player.GetComponent<CombatMusicControl>();
     }
 
 /*    void OnTriggerEnter (Collider other)
@@ -76,7 +78,8 @@ public class EnemyAttack : MonoBehaviour
         timer += Time.deltaTime;
 
         float dist = Vector3.Distance(player.transform.position, enemy.transform.position);
-        if(dist <= 1.2)
+
+        if (dist <= 1.2)
         {
             playerInRange = true;
         }
@@ -85,6 +88,27 @@ public class EnemyAttack : MonoBehaviour
             playerInRange = false;
         }
 
+        // Audio transition for quiet/action moments; not working 4 May 2017
+        //if(dist <= 10)
+        //{
+        //    print("In Range Fighting Music");
+        //    if (musicControl.fighting == false)
+        //    {
+        //        print("TransitionIn Action");
+        //        musicControl.fighting = true;
+        //        musicControl.TransitionAudio(musicControl.fighting);
+        //    }
+        //}
+        //else
+        //{
+        //    print("Out Range Fighting Music");
+        //    if (musicControl.fighting == true)
+        //    {
+        //        print("TransitionOut Action");
+        //        musicControl.fighting = false;
+        //        musicControl.TransitionAudio(musicControl.fighting);
+        //    }
+        //}
 
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
         if (timer >= timeBetweenAttacks && playerInRange) //&& enemyHealth.currentHealth > 0)

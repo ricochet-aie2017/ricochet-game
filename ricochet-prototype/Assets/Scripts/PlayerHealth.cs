@@ -107,9 +107,7 @@ public class PlayerHealth : MonoBehaviour {
         SceneManager.LoadScene(2);
         //playerMovement.enabled = false;
     }
-
-
-
+ 
     void SetHealthUI()
     {
         // Set the slider's value appropriately.
