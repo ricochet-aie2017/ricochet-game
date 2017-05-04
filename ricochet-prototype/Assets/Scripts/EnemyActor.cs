@@ -46,6 +46,18 @@ public class EnemyActor : MonoBehaviour {
             Kill(damager);
     }
 
+    // Handles damaging this enemy; overloaded to pass through bounce multiplier for scoring
+    public void TakeDamage(GameObject damager, int damage, int bounceMulti)
+    {
+        int dmg = damage;
+        OnDamage(damager, ref dmg);
+
+        health -= dmg;
+
+        if (health < 0)
+            Kill(damager, bounceMulti);
+    }
+
     protected virtual void OnDamage(GameObject damager, ref int damage)
     {
         //TODO: Extra stuff to be done when taking damage, as an example, damage reduction
@@ -63,6 +75,16 @@ public class EnemyActor : MonoBehaviour {
         Destroy(this.gameObject);
         player.kills++;
         player.killPoints += points;
+    }
+
+    // overloaded to pass bounce multiplier for scoring
+    public void Kill(GameObject killer, int bounceMulti)
+    {
+        OnKilled(killer);
+
+        Destroy(this.gameObject);
+        player.kills++;
+        player.killPoints += (points * (bounceMulti + 1));
     }
 
     protected virtual void OnKilled(GameObject killer)

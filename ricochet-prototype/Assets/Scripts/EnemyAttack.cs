@@ -11,6 +11,7 @@ public class EnemyAttack : MonoBehaviour
     GameObject player;                          // Reference to the player GameObject.
     GameObject enemy;
     PlayerHealth playerHealth;                  // Reference to the player's health.
+    PlayerActor playerActor;
     EnemyActor enemyActor;
     //EnemyHealth enemyHealth;                    // Reference to this enemy's health.
     bool playerInRange;                         // Whether player is within the trigger collider and can be attacked.
@@ -21,14 +22,15 @@ public class EnemyAttack : MonoBehaviour
     {
         // Setting up the references.
         player = GameObject.FindGameObjectWithTag ("Player");
-        playerHealth = player.GetComponent <PlayerHealth> ();
+        playerHealth = player.GetComponent<PlayerHealth>();
+        playerActor = player.GetComponent<PlayerActor>();
         enemy = this.gameObject;
-        enemyActor = enemy.GetComponent <EnemyActor> ();
+        enemyActor = enemy.GetComponent<EnemyActor>();
         //enemyHealth = GetComponent<EnemyHealth>();
         //anim = GetComponent <Animator> ();
     }
 
-    void OnTriggerEnter (Collider other)
+/*    void OnTriggerEnter (Collider other)
     {
         // If the entering collider is the player...
         if(other.gameObject == player)
@@ -48,10 +50,10 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    /*void OnCollisionEnter (Collision col)
+    void OnCollisionEnter (Collision col)
     {
         // If the entering collider is the player...
-        if (col.gameObject == player)
+        if (col.gameObject.tag == "Player")
         {
             // ... the player is in range.
             playerInRange = true;
@@ -61,7 +63,7 @@ public class EnemyAttack : MonoBehaviour
     void OnCollisionExit (Collision col)
     {
         // If the exiting collider is the player...
-        if (col.gameObject == player)
+        if (col.gameObject.tag == "Player")
         {
             // ... the player is no longer in range.
             playerInRange = false;
@@ -73,8 +75,19 @@ public class EnemyAttack : MonoBehaviour
         // Add the time since Update was last called to the timer.
         timer += Time.deltaTime;
 
+        float dist = Vector3.Distance(player.transform.position, enemy.transform.position);
+        if(dist <= 1.2)
+        {
+            playerInRange = true;
+        }
+        else
+        {
+            playerInRange = false;
+        }
+
+
         // If the timer exceeds the time between attacks, the player is in range and this enemy is alive...
-        if(timer >= timeBetweenAttacks && playerInRange) //&& enemyHealth.currentHealth > 0)
+        if (timer >= timeBetweenAttacks && playerInRange) //&& enemyHealth.currentHealth > 0)
         {
             // ... attack.
             Attack ();
