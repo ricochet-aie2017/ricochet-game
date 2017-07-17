@@ -13,6 +13,10 @@ public class Bullet : MonoBehaviour
     public int Speed = 500;
     public int SpeedPerBounce = 500;
 
+    public Color[] BounceColours;
+    public GameObject BounceEffectPrefab;
+    public GameObject BloodEffectPrefab;
+
     GameObject player;
     PlayerHealth playerHealth;
     
@@ -23,6 +27,13 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(this.transform.forward * Speed);
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
+
+        // Set initial colour
+        if (BounceColours.Length > 0)
+        {
+            // Change the colour based on the bounce colour array
+            this.GetComponent<MeshRenderer>().material.color = BounceColours[0];
+        }
     }
 	
 	// Update is called once per frame
@@ -45,6 +56,17 @@ public class Bullet : MonoBehaviour
         // Check for player collision
         if (collision.gameObject.name == "Player") // Hit the player
         {
+            // Create the blood effect
+            if (BloodEffectPrefab)
+            {
+                var YY = Quaternion.FromToRotation(BloodEffectPrefab.transform.up, Vector3.up);
+                var lookRot = Quaternion.LookRotation(collision.contacts[0].normal, Vector3.up);
+                lookRot = YY * lookRot;
+                var effect = Instantiate<GameObject>(BloodEffectPrefab, collision.contacts[0].point, YY);// Quaternion.Euler(-90.0f, 0.0f, 0.0f));
+
+                // Kill the effect after
+                GameObject.Destroy(effect, 0.5f);
+            }
             playerHealth.TakeDamage(Damage);
             Kill();
             return;
@@ -54,6 +76,18 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             var enemyScript = collision.gameObject.GetComponent<EnemyActor>();
+
+            // Create the blood effect
+            if (BloodEffectPrefab)
+            {
+                var YY = Quaternion.FromToRotation(BloodEffectPrefab.transform.up, Vector3.up);
+                var lookRot = Quaternion.LookRotation(collision.contacts[0].normal, Vector3.up);
+                lookRot = YY * lookRot;
+                var effect = Instantiate<GameObject>(BloodEffectPrefab, collision.contacts[0].point, YY);// Quaternion.Euler(-90.0f, 0.0f, 0.0f));
+
+                // Kill the effect after
+                GameObject.Destroy(effect, 0.5f);
+            }
 
             if (enemyScript != null)
             {
@@ -66,6 +100,17 @@ public class Bullet : MonoBehaviour
             }
         }
 
+        // Create the bounce effect
+        if (BounceEffectPrefab)
+        {
+            var YY = Quaternion.FromToRotation(BounceEffectPrefab.transform.up, Vector3.up);
+            var lookRot = Quaternion.LookRotation(collision.contacts[0].normal, Vector3.up);
+            lookRot = YY * lookRot;
+            var effect = Instantiate<GameObject>(BounceEffectPrefab, collision.contacts[0].point, YY);// Quaternion.Euler(-90.0f, 0.0f, 0.0f));
+
+            // Kill the effect after
+            GameObject.Destroy(effect, 0.5f);
+        }
 
         transform.forward = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
         Bounce();
@@ -76,9 +121,20 @@ public class Bullet : MonoBehaviour
     /// </summary>
     private void Bounce()
     {
-        //TODO: Can add effects here
 
         BounceCount++; // Increment the bounce counter
+
+        //TODO: Can add effects here
+        if (BounceColours.Length > 0)
+        {
+            // Generate a colour index based on bounces into the bounce colour array
+            int colourIndex = BounceCount >= BounceColours.Length ? BounceColours.Length - 1 : BounceCount;
+
+            // Change the colour based on the bounce colour array
+            this.GetComponent<MeshRenderer>().material.color = BounceColours[colourIndex];
+        }
+
+        
 
         //TODO: Increase point counter
         //TODO: Increase the projectile speed
